@@ -13,15 +13,19 @@
 
         (function initController() {
             // reset login status
-            AuthenticationService.ClearCredentials();
+            //AuthenticationService.ClearCredentials();
         })();
 
         function login() {
             vm.dataLoading = true;
-            AuthenticationService.Login(vm.username, vm.password, function (response) {
+            AuthenticationService.Login(vm.username, function (response) {
+            	//console.log("<<<<< LOGIN CTRL")
+            	//console.log(response.user.username);
                 if (response.success) {
-                    AuthenticationService.SetCredentials(vm.username, vm.password);
-                    $location.path('/');
+                	//LocalService.set('auth_user', JSON.stringify(response.user.username));
+                	//LocalService.set('auth_token', JSON.stringify(response.token));
+                    //AuthenticationService.SetCredentials(vm.username);
+                    $location.path('/user-type');
                 } else {
                     FlashService.Error(response.message);
                     vm.dataLoading = false;

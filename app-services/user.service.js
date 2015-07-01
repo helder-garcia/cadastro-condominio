@@ -5,8 +5,8 @@
         .module('app')
         .factory('UserService', UserService);
 
-    UserService.$inject = ['$http'];
-    function UserService($http) {
+    UserService.$inject = ['$http', 'API_END_POINT'];
+    function UserService($http, API_END_POINT) {
         var service = {};
 
         service.GetAll = GetAll;
@@ -19,15 +19,15 @@
         return service;
 
         function GetAll() {
-            return $http.get('/api/users').then(handleSuccess, handleError('Error getting all users'));
+            return $http.get(API_END_POINT + '/users/').then(handleSuccess, handleError('Error getting all users'));
         }
 
         function GetById(id) {
-            return $http.get('/api/users/' + id).then(handleSuccess, handleError('Error getting user by id'));
+            return $http.get(API_END_POINT + '/users/' + id).then(handleSuccess, handleError('Error getting user by id'));
         }
 
         function GetByUsername(username) {
-            return $http.get('/api/users/' + username).then(handleSuccess, handleError('Error getting user by username'));
+            return $http.get(API_END_POINT + '/users?username=' + username).then(handleSuccess, handleError('Error getting user by username'));
         }
 
         function Create(user) {

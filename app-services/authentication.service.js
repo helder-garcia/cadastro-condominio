@@ -3,64 +3,106 @@
 
     angular
         .module('app')
-        .factory('AuthenticationService', AuthenticationService);
+        .factory('AuthenticationService', AuthenticationService)
+    	.factory('AuthInterceptor', AuthInterceptor);
 
-    AuthenticationService.$inject = ['$http', '$cookieStore', '$rootScope', '$timeout', 'UserService'];
-    function AuthenticationService($http, $cookieStore, $rootScope, $timeout, UserService) {
+    AuthenticationService.$inject = ['$http', '$rootScope', '$timeout', 'UserService', 'API_END_POINT', 'LocalService', 'AccessLevels'];
+    function AuthenticationService($http, $rootScope, $timeout, UserService, API_END_POINT, LocalService, AccessLevels) {
         var service = {};
 
         service.Login = Login;
-        service.SetCredentials = SetCredentials;
-        service.ClearCredentials = ClearCredentials;
+        service.authorize = authorize;
+        service.isAuthenticated = isAuthenticated;
+        //service.SetCredentials = SetCredentials;
+        //service.ClearCredentials = ClearCredentials;
 
         return service;
 
-        function Login(username, password, callback) {
+        function authorize(access) {
+            if (access === AccessLevels.user) {
+              return this.isAuthenticated();
+            } else {
+              return true;
+            }
+          }
+          
+          function isAuthenticated() {
+            return LocalService.get('auth_token');
+          }     
+        
+        function Login(username, callback) {
 
-            /* Dummy authentication for testing, uses $timeout to simulate api call
-             ----------------------------------------------*/
-            $timeout(function () {
-                var response;
-                UserService.GetByUsername(username)
-                    .then(function (user) {
-                        if (user !== null && user.password === password) {
-                            response = { success: true };
-                        } else {
-                            response = { success: false, message: 'Username or password is incorrect' };
-                        }
-                        callback(response);
-                    });
-            }, 1000);
-
-            /* Use this for real authentication
-             ----------------------------------------------*/
-            //$http.post('/api/authenticate', { username: username, password: password })
-            //    .success(function (response) {
-            //        callback(response);
-            //    });
+            /*
+			 * Dummy authentication for testing, uses $timeout to simulate api
+			 * call ----------------------------------------------
+			 */
+        	/*
+			 * $timeout(function () { var response;
+			 * 
+			 * UserService.GetByUsername(username) .then(function (obj) { if
+			 * (obj.data[0].username === username) { response = { success: true }; }
+			 * else { response = { success: false, message: 'Identificador
+			 * incorreto//' }; } callback(response); }); }, 1000);
+			 */
+            // Use this for real authentication
+            /* ---------------------------------------------- */
+            $http.post(API_END_POINT + '/authenticates/authenticate', { username: username })
+                .success(function (response) {
+                	LocalService.set('auth_user', response.user.username);
+                	LocalService.set('auth_token', response.token);
+                	callback(response);
+                })
+                .error(function(response){
+                	callback(response);
+                });;
 
         }
-
-        function SetCredentials(username, password) {
-            var authdata = Base64.encode(username + ':' + password);
-
-            $rootScope.globals = {
-                currentUser: {
-                    username: username,
-                    authdata: authdata
-                }
-            };
-
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
-            $cookieStore.put('globals', $rootScope.globals);
-        }
-
-        function ClearCredentials() {
-            $rootScope.globals = {};
-            $cookieStore.remove('globals');
-            $http.defaults.headers.common.Authorization = 'Basic ';
-        }
+        /*
+		 * function SetCredentials(username) { var authdata =
+		 * Base64.encode(username);
+		 * 
+		 * $rootScope.globals = { currentUser: { username: username, authdata:
+		 * authdata } };
+		 * 
+		 * $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; //
+		 * jshint ignore:line $cookieStore.put('globals', $rootScope.globals); }
+		 * 
+		 * function ClearCredentials() { $rootScope.globals = {};
+		 * $cookieStore.remove('globals');
+		 * $http.defaults.headers.common.Authorization = 'Basic '; }
+		 */
     }
+
+    AuthInterceptor.$inject = ['$q', '$injector'];
+
+    function AuthInterceptor($q, $injector) {
+        var LocalService = $injector.get('LocalService');
+
+        return {
+          request: function(config) {
+            var token;
+            token = LocalService.get('auth_token');
+            //if (LocalService.get('auth_token')) {
+            //  token = angular.fromJson(LocalService.get('auth_token')).token;
+              
+            //}
+            
+            if (token) {
+              config.headers.Authorization = 'Bearer ' + token;
+            }
+            
+            return config;
+          },
+          responseError: function(response) {
+            if (response.status === 401 || response.status === 403) {
+              //LocalService.unset('auth_token');
+              $injector.get('$state').go('anon.login');
+            }
+            return $q.reject(response);
+          }
+        }
+      }
+      
 
     // Base64 encoding service used by AuthenticationService
     var Base64 = {
