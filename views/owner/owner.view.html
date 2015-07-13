@@ -1,5 +1,10 @@
 ﻿<md-content layout-padding>
+	<toaster-container ng-if="userForm.$valid" toaster-options="{'position-class': 'toast-center'}"></toaster-container>
 	<form name="userForm">
+	<md-button ng-show="userForm.$dirty" class="md-fab md-fab-bottom-right material-icons" aria-label="Save" ng-click="save()">
+		<md-tooltip>Salvar</md-tooltip>
+		save
+	</md-button>
 		<md-toolbar class="md-accent">
 			<h2 class="md-toolbar-tools">
 				<md-tooltip>Informe seus dados pessoais. Manteremos sigilo.</md-tooltip>
@@ -29,11 +34,10 @@
 		  </md-input-container>
 		  <md-input-container flex>
 		    <label>Email</label>
-		    <input name="primaryEmail" ng-model="ownerEntry.primaryEmail" required md-maxlength="60" minlength="2">
+		    <input type="email" name="primaryEmail" ng-model="ownerEntry.primaryEmail" required>
 		    <div ng-messages="userForm.primaryEmail.$error" ng-show="userForm.primaryEmail.$dirty">
+			  <div ng-message="email">Informe um email válido!</div>
 		      <div ng-message="required">Este campo é obrigatório!</div>
-		      <div ng-message="md-maxlength">Tamanho máximo atingido!</div>
-		      <div ng-message="minlength">Seu email deve ter mais de uma letra!</div>
 		    </div>
 		  </md-input-container>
 		  <md-input-container style="width:10%">
@@ -285,14 +289,4 @@
 		</div>
 		</div>
 	</form>
-	<section layout="row" layout-sm="column" layout-align="center center">
-		<md-button class="md-raised md-primary" ng-click="back()">
-			<md-tooltip>Voltar</md-tooltip>
-			Voltar
-		</md-button>
-		<md-button class="md-raised md-primary" ng-click="save()">
-			<md-tooltip>Salva alterações</md-tooltip>
-			Salvar
-		</md-button>		
-    </section>
 </md-content>

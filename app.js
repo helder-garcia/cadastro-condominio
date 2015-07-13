@@ -1,7 +1,7 @@
 ﻿(function() {
 	'use strict';
 
-	angular.module('app', [ 'ui.router', 'configuration', 'ngMaterial', 'ngMessages' ])
+	angular.module('app', [ 'ui.router', 'configuration', 'ngMaterial', 'ngMessages', 'toaster'])
 	// .module('app', ['ngRoute', 'ngCookies', 'configuration'])
 	.config(config).run(run);
 	/*
@@ -71,7 +71,12 @@
 		
 		$mdThemingProvider.theme('default')
 			.primaryPalette('blue-grey')
-			.accentPalette('grey');
+			.accentPalette('grey')
+			.warnPalette('red');
+		$mdThemingProvider.theme('toaster-success')
+			.primaryPalette('teal');
+		$mdThemingProvider.theme('toaster-error')
+			.primaryPalette('red');
 	};
 
 	run.$inject = [ '$rootScope', '$state', 'AuthenticationService', '$injector', 'LocalService' ];

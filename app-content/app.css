@@ -13,4 +13,24 @@
 .md-124 {
 	font-size: 124px;
 }
+md-toast {
+	
+}
+md-toast.md-toaster-success-theme {
+    background-color: teal;
+}
+md-toast.md-toaster-error-theme {
+    background-color: teal;
+}
+.md-button.md-fab.md-fab-bottom-right {
+  position: fixed;
+  float:right;
+  bottom: 28px;
+  right: 28px;
+  background-color: teal;
+  color: white;
+}
 
+.md-button.md-fab.md-fab-bottom-right:hover {
+	background-color: teal;
+}

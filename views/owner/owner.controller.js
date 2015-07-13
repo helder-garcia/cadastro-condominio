@@ -5,8 +5,8 @@
         .module('app')
         .controller('OwnerController', OwnerController);
 
-    OwnerController.$inject = ['$rootScope', '$scope', 'OwnerService', 'AuthenticationService', 'UserService'];
-    function OwnerController($rootScope, $scope, OwnerService, AuthenticationService, UserService) {
+    OwnerController.$inject = ['$rootScope', '$scope', 'OwnerService', 'AuthenticationService', 'UserService', 'toaster'];
+    function OwnerController($rootScope, $scope, OwnerService, AuthenticationService, UserService, toaster) {
     	var user = {};
     	$scope.ownerEntry = {};
     	if (AuthenticationService.isAuthenticated()) {
@@ -16,11 +16,13 @@
                 user = response.data[0];
                 $scope.ownerEntry.unit = user.unitnumber;
             });
+            
     	}
     	
     	$scope.ownerEntry.isResident = "SIM";
     	$scope.save = function() {
-    		OwnerService.Create($scope.ownerEntry);
+    		toaster.pop('info', "Dados Gravados");
+    		//$mdToast.show($mdToast.simple().content("Gravado").theme("toaster-success").position("bottom"));
     	}
   };
 })();
