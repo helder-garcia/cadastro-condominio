@@ -1,7 +1,7 @@
 ﻿(function() {
 	'use strict';
 
-	angular.module('app', [ 'ui.router', 'configuration' ])
+	angular.module('app', [ 'ui.router', 'configuration', 'ngMaterial', 'ngMessages' ])
 	// .module('app', ['ngRoute', 'ngCookies', 'configuration'])
 	.config(config).run(run);
 	/*
@@ -32,8 +32,8 @@
 	 * '/register']) === -1; var loggedIn = $rootScope.globals.currentUser; if
 	 * (restrictedPage && !loggedIn) { $location.path('/login'); } }); }
 	 */
-	config.$inject = [ '$stateProvider', '$urlRouterProvider', 'AccessLevels', '$httpProvider' ];
-	function config($stateProvider, $urlRouterProvider, AccessLevels, $httpProvider) {
+	config.$inject = [ '$stateProvider', '$urlRouterProvider', 'AccessLevels', '$httpProvider', '$mdThemingProvider' ];
+	function config($stateProvider, $urlRouterProvider, AccessLevels, $httpProvider, $mdThemingProvider) {
 		$stateProvider.state('anon', {
 			abstract : true,
 			template : '<ui-view/>',
@@ -49,6 +49,7 @@
 		$stateProvider.state('user', {
 			abstract : true,
 			template : '<ui-view/>',
+			controller : 'navController',
 			data : {
 				access : AccessLevels.user
 			}
@@ -57,9 +58,20 @@
 			templateUrl : 'home/home.view.html',
 			controller : 'HomeController',
 			controllerAs : 'vm'
+		}).state('user.owner', {
+			url : '/user-owner',
+			templateUrl : 'views/owner/owner.view.html',
+			controller : 'OwnerController'
+		}).state('user.renter', {
+			url : '/user-renter',
+			templateUrl : 'views/renter/renter.view.html'
 		});
 		$urlRouterProvider.otherwise('/login');
 		$httpProvider.interceptors.push('AuthInterceptor');
+		
+		$mdThemingProvider.theme('default')
+			.primaryPalette('blue-grey')
+			.accentPalette('grey');
 	};
 
 	run.$inject = [ '$rootScope', '$state', 'AuthenticationService', '$injector', 'LocalService' ];
@@ -85,6 +97,17 @@
 				$state.go('anon.login');
 			}
 		});
+        $rootScope.$state = $state;
+        //$rootScope.$stateParams = $stateParams;
+        $rootScope.$on("$stateChangeSuccess",  function(event, toState, toParams, fromState, fromParams) {
+            // to be used for back button //won't work when page is reloaded.
+            $rootScope.previousState_name = fromState.name;
+            $rootScope.previousState_params = fromParams;
+        });
+        //back button function called from back button's ng-click="back()"
+        $rootScope.back = function() {
+            $state.go($rootScope.previousState_name,$rootScope.previousState_params);
+        };	
 	}
 
 })();

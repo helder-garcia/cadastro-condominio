@@ -1,1 +1,16 @@
-﻿
+﻿.md-toolbar-tools h1 {
+  font-size: inherit;
+  font-weight: inherit;
+  margin: inherit;
+}
+.md-button-larger {
+	width: 200px;
+	height: 80px;
+}
+.md-48 {
+	font-size: 48px;
+}
+.md-124 {
+	font-size: 124px;
+}
+

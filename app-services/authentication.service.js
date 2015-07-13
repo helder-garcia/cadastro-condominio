@@ -11,8 +11,10 @@
         var service = {};
 
         service.Login = Login;
+        service.logout = logout;
         service.authorize = authorize;
         service.isAuthenticated = isAuthenticated;
+        service.getIdentifier = getIdentifier;
         //service.SetCredentials = SetCredentials;
         //service.ClearCredentials = ClearCredentials;
 
@@ -28,8 +30,12 @@
           
           function isAuthenticated() {
             return LocalService.get('auth_token');
-          }     
-        
+          }
+
+          function getIdentifier() {
+              return LocalService.get('auth_user');
+            }
+
         function Login(username, callback) {
 
             /*
@@ -50,12 +56,19 @@
                 .success(function (response) {
                 	LocalService.set('auth_user', response.user.username);
                 	LocalService.set('auth_token', response.token);
+                	//LocalService.set('auth_unit', response.user.unitnumber);
                 	callback(response);
                 })
                 .error(function(response){
                 	callback(response);
                 });;
 
+        }
+
+        function logout(callback) {
+            // The backend doesn't care about logouts, delete the token and you're good to go.
+            LocalService.unset('auth_token');
+            LocalService.unset('auth_user');
         }
         /*
 		 * function SetCredentials(username) { var authdata =

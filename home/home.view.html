@@ -1,11 +1,18 @@
-﻿<h1>Hi {{vm.user.username}}!</h1>
-<p>You're logged in!!</p>
-<h3>All registered users:</h3>
-<ul>
-    <li ng-repeat="user in vm.allUsers">
-        {{user.username}} ({{user.firstName}} {{user.lastName}})
-        - <a href="#" ng-click="vm.deleteUser(user.id)">Delete</a>
-    </li>
-</ul>
-<p>&nbsp;</p>
-<p><a href="#/login" class="btn btn-primary">Logout</a></p>
+﻿<div>
+	<section layout="row" layout-sm="column" layout-align="center center">
+		<md-button class="md-raised md-primary md-button-larger" ui-sref="user.owner">
+			<md-tooltip>Clique se você é dono do apartamento</md-tooltip>
+			<div>
+				<i class="material-icons md-124">vpn_key</i>
+			</div>
+			<div>Sou proprietário</div>
+		</md-button>
+      <md-button class="md-raised md-primary md-button-larger" ui-sref="user.renter">
+      		<md-tooltip>Clique se você usa em aluguel o apartamento</md-tooltip>
+			<div>
+				<i class="material-icons md-124">home</i>
+			</div>
+			<div>Sou inquilino</div>
+      </md-button>
+    </section>
+</div>

@@ -1,4 +1,27 @@
-﻿<div class="col-md-6 col-md-offset-3">
+﻿	<form name="loginForm" ng-submit="vm.login()" role="form">
+
+<md-content layout="row" layout-align="center">
+	<div layout="column" style="margin-top: 50px">
+			<div flex="33" layout="column" layout-align="center" layout-fill>
+			<md-input-container class="md-icon-float">
+				<label>Identificador</label>
+				<md-icon class="material-icons" style="color: blue">person</md-icon>
+				<input name="username" ng-model="vm.username" required ng-maxlength="40">
+				<div ng-messages="loginForm.username.$error" ng-show="loginForm.username.$dirty">
+					<div ng-message="required">Este campo é obrigatório!</div>
+		      		<div ng-message="md-maxlength">Tamanho máximo atingido!</div>
+				</div>
+			</md-input-container>
+			</div>
+			<div flex="33" layout="column" layout-align="center" layout-fill>
+				<md-button class="md-raised md-primary">Entrar</md-button>
+			</div>
+	</div>			
+
+</md-content>
+	</form>
+<!-- 
+<div class="col-md-6 col-md-offset-3">
     <h2>Login</h2>
     <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
     <form name="form" ng-submit="vm.login()" role="form">
@@ -14,3 +37,4 @@
         </div>
     </form>
 </div>
+ -->

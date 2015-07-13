@@ -3,17 +3,47 @@
 <head>
     <meta charset="utf-8" />
     <title>AngularJS User Registration and Login Example</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="node_modules/angular-material/angular-material.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" /> -->
     <link href="app-content/app.css" rel="stylesheet" />
+    <meta name="viewport" content="initial-scale=1" />
 </head>
-<body>
+<body layout="column" ng-controller="navController">
+    <md-toolbar layout="row">
+      <div class="md-toolbar-tools">
+      	<md-button ng-show="$state.current.name === 'user.owner'" ng-click="back()" class="material-icons" style="color: white">
+      		<md-tooltip>Voltar</md-tooltip>
+      		chevron_left
+      	</md-button>
+        <h1>Condomínio Daniella Green </h1>
+        <span flex></span>
+        <md-button ng-show="$state.current.name === 'user.owner'" class="material-icons" style="color: white">
+        	<md-tooltip>Salvar</md-tooltip>
+        	save
+        </md-button>
+        
+        <md-button ng-show="isAuthenticated()" ng-hide="!isAuthenticated()" ng-click="logout()" class="material-icons" style="color: white">
+        	<md-tooltip>Sair</md-tooltip>
+        	exit_to_app
+        </md-button>
+      </div>
+    </md-toolbar>
+    <div layout="row" flex>
+        <div layout="column" flex id="content">
+            <md-content layout="column" flex class="md-padding">
+             	<div ui-view></div>
+            </md-content>
+        </div>
+    </div>
 
+<!-- 
     <div class="jumbotron">
+
         <div class="container">
             <div class="col-sm-8 col-sm-offset-2">
                 <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
-                <div ui-view></div>
-                <!-- <div ng-view></div> -->
+                
             </div>
         </div>
     </div>
@@ -22,11 +52,15 @@
             <a href="http://www.webify.com.br">Webify</a>
         </p>
     </div>
-
+ -->
     <script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
     <script src="node_modules/angular/angular.js"></script>
     <script src="node_modules/angular-resource/angular-resource.js"></script>
     <script src="node_modules/angular-ui-router/build/angular-ui-router.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.js"></script>
+    <script src="node_modules/angular-aria/angular-aria.js"></script>
+    <script src="node_modules/angular-material/angular-material.js"></script>
+    <script src="node_modules/angular-messages/angular-messages.js"></script>    
     <!-- 
     <script src="//code.angularjs.org/1.2.20/angular-route.js"></script>
     <script src="//code.angularjs.org/1.2.13/angular-cookies.js"></script>
@@ -40,13 +74,15 @@
     <!-- Real user service that uses an api -->
     <script src="config/env/development.js"></script>
     <script src="app-services/user.service.js"></script>
+    <script src="app-services/owner.service.js"></script>
     
 
     <!-- Fake user service for demo that uses local storage -->
     <!-- <script src="app-services/user.service.local-storage.js"></script> -->
-
+	<script src="navbar/navController.js"></script>
     <script src="home/home.controller.js"></script>
     <script src="login/login.controller.js"></script>
+    <script src="views/owner/owner.controller.js"></script>
     <script src="register/register.controller.js"></script>
 </body>
 </html>

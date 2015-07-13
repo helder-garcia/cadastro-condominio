@@ -5,16 +5,22 @@
         .module('app')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['UserService', '$rootScope', 'LocalService'];
-    function HomeController(UserService, $rootScope, LocalService) {
+    HomeController.$inject = ['UserService', '$rootScope', 'LocalService', 'AuthenticationService'];
+    function HomeController(UserService, $rootScope, LocalService, AuthenticationService) {
         var vm = this;
-
+        
         vm.user = null;
         vm.allUsers = [];
         vm.deleteUser = deleteUser;
+        vm.isLoggedIn = $rootScope.isLoggedIn;
+        vm.isCollapsed = $rootScope.isCollapsed;
 
         initController();
 
+        //function isLoggedIn() {
+        //	return AuthenticationService.isAuthenticated();
+        //}
+        
         function initController() {
             loadCurrentUser();
             loadAllUsers();
