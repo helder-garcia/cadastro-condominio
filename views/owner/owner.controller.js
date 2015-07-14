@@ -8,6 +8,9 @@
     OwnerController.$inject = ['$rootScope', '$scope', 'OwnerService', 'AuthenticationService', 'UserService', 'toaster'];
     function OwnerController($rootScope, $scope, OwnerService, AuthenticationService, UserService, toaster) {
     	var user = {};
+    	$scope.phoneNumbrFixPtr = /^\d{2}-\d{4}-\d{4}$/;
+    	$scope.phoneNumbrCelPtr = /^\d{2}-\d{4,5}-\d{4}$/;
+    	$scope.vehicleNumberPtr = /^\w{3}-\d{4}$/;
     	$scope.ownerEntry = {};
     	if (AuthenticationService.isAuthenticated()) {
     		$scope.ownerEntry.username = AuthenticationService.getIdentifier();

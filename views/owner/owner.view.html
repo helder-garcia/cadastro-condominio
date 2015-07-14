@@ -47,29 +47,29 @@
 		</div>
 		<div layout layout-sm="column">
 		  <md-input-container flex>
-		  	<md-tooltip>(61) 3333-2222</md-tooltip>
+		  	<md-tooltip>61-3333-2222</md-tooltip>
 		    <label>Telefone Residencial</label>
-		    <input name="homePhone" ng-model="ownerEntry.homePhone" required md-maxlength="15" >			
+		    <input name="homePhone" ng-model="ownerEntry.homePhone" required ng-pattern="phoneNumbrFixPtr" >			
 		    <div ng-messages="userForm.homePhone.$error" ng-show="userForm.homePhone.$dirty">
 		      <div ng-message="required">Este campo é obrigatório!</div>
-		      <div ng-message="md-maxlength">Tamanho máximo atingido!</div>
+		      <div ng-message="pattern">Por favor, utilize o formato 61-3333-2222</div>
 		    </div>
 		  </md-input-container>
 		  <md-input-container flex>
 		  	<md-tooltip>(61) 9999-8888</md-tooltip>
 		    <label>Telefone Celular</label>
-		    <input name="cellPhone" ng-model="ownerEntry.cellPhone" required md-maxlength="15" >
+		    <input name="cellPhone" ng-model="ownerEntry.cellPhone" required ng-pattern="phoneNumbrCelPtr" >
 		    <div ng-messages="userForm.cellPhone.$error" ng-show="userForm.cellPhone.$dirty">
 		      <div ng-message="required">Este campo é obrigatório!</div>
-		      <div ng-message="md-maxlength">Tamanho máximo atigindo!</div>
+		      <div ng-message="pattern">Por favor, utilize o formato 61-9999-8888 ou 61-99999-8888</div>
 		    </div>
 		  </md-input-container>
 		  <md-input-container flex>
 		  	<md-tooltip>(61) 3333-2222</md-tooltip>
 		    <label>Telefone Comercial</label>
-		    <input name="workPhone" ng-model="ownerEntry.workPhone" md-maxlength="15" >
+		    <input name="workPhone" ng-model="ownerEntry.workPhone" ng-pattern="phoneNumbrFixPtr" >
 		    <div ng-messages="userForm.workPhone.$error" ng-show="userForm.workPhone.$dirty">
-		      <div ng-message="md-maxlength">Tamanho máximo atigindo!</div>
+		      <div ng-message="pattern">Por favor, utilize o formato 61-3333-2222</div>
 		    </div>
 		  </md-input-container>
 		</div>
@@ -108,9 +108,9 @@
 		  <md-input-container flex>
 		  	<md-tooltip>(61) 9999-8888</md-tooltip>
 		    <label>Telefone</label>
-		    <input name="reference1Phone" ng-model="ownerEntry.reference1Phone" md-maxlength="15" >			
-		    <div ng-messages="userForm.reference1Phone.$error" ng-show="userForm.reference1Phone.$dirty">
-		      <div ng-message="md-maxlength">Tamanho máximo atingido!</div>
+		    <input name="reference1Phone" ng-model="ownerEntry.reference1Phone" ng-pattern="phoneNumbrCelPtr" >			
+		      <div ng-messages="userForm.reference1Phone.$error" ng-show="userForm.reference1Phone.$dirty">
+		      <div ng-message="pattern">Por favor, utilize o formato 61-9999-8888 ou 61-99999-8888</div>
 		    </div>
 		  </md-input-container>
 		</div>
@@ -145,9 +145,9 @@
 		  </md-input-container>
 		  <md-input-container flex>
 		    <label>Placa</label>
-		    <input name="vehicle1Number" ng-model="ownerEntry.vehicle1Number" md-maxlength="20" >
+		    <input name="vehicle1Number" ng-model="ownerEntry.vehicle1Number" ng-pattern="vehicleNumberPtr" ng-blur="ownerEntry.vehicle1Number=ownerEntry.vehicle1Number.toUpperCase();" >
 		    <div ng-messages="userForm.vehicle1Number.$error" ng-show="userForm.vehicle1Number.$dirty">
-		      <div ng-message="md-maxlength">Tamanho máximo atigindo!</div>
+		      <div ng-message="pattern">Por favor, utilize o formato XYZ-9999</div>
 		    </div>
 		  </md-input-container>
 		</div>
@@ -175,9 +175,9 @@
 		  </md-input-container>
 		  <md-input-container flex>
 		    <label>Placa</label>
-		    <input name="vehicle2Number" ng-model="ownerEntry.vehicle2Number" md-maxlength="20" >
+		    <input name="vehicle2Number" ng-model="ownerEntry.vehicle2Number" ng-pattern="vehicleNumberPtr" ng-blur="ownerEntry.vehicle2Number=ownerEntry.vehicle2Number.toUpperCase();" >
 		    <div ng-messages="userForm.vehicle2Number.$error" ng-show="userForm.vehicle2Number.$dirty">
-		      <div ng-message="md-maxlength">Tamanho máximo atigindo!</div>
+		      <div ng-message="pattern">Por favor, utilize o formato XYZ-9999</div>
 		    </div>
 		  </md-input-container>
 		</div>
@@ -205,9 +205,9 @@
 		  </md-input-container>
 		  <md-input-container flex>
 		    <label>Placa</label>
-		    <input name="vehicle3Number" ng-model="ownerEntry.vehicle3Number" md-maxlength="20" >
+		    <input name="vehicle3Number" ng-model="ownerEntry.vehicle3Number" ng-pattern="vehicleNumberPtr" ng-blur="ownerEntry.vehicle3Number=ownerEntry.vehicle3Number.toUpperCase();" >
 		    <div ng-messages="userForm.vehicle3Number.$error" ng-show="userForm.vehicle3Number.$dirty">
-		      <div ng-message="md-maxlength">Tamanho máximo atigindo!</div>
+		      <div ng-message="pattern">Por favor, utilize o formato XYZ-9999</div>
 		    </div>
 		  </md-input-container>
 		</div>
