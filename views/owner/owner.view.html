@@ -75,13 +75,13 @@
 		</div>
 		<div layout" >
 		  <md-input-container flex>
-		  		<md-checkbox class="md-primary" ng-true-value="'SIM'" ng-false-value="'NÃO'" ng-model="ownerEntry.isResident" aria-label="Morador">Morador? {{ onwerIsResident }}</md-checkbox>
+		  		<md-checkbox class="md-primary" ng-true-value="'SIM'" ng-false-value="'NÃO'" ng-model="ownerEntry.isResident" aria-label="Morador">Morador? {{ ownerEntry.isResident }}</md-checkbox>
 		  </md-input-container>		
 		</div>
 		<div ng-hide="ownerEntry.isResident === 'SIM'">
 		  <md-input-container flex>
-		    <label>Endereço (Rua, Número, Cidade, Estado)</label>
-		    <input name="ownerAddress" ng-model="ownerEntry.ownerAddress" md-maxlength="80" >
+		    <label>Endereço (Rua, Número, Cidade, Estado, CEP)</label>
+		    <input name="ownerAddress" ng-model="ownerEntry.ownerAddress" md-maxlength="120" >
 		    <div ng-messages="userForm.ownerAddress.$error" ng-show="userForm.ownerAddress.$dirty">
 		      <div ng-message="md-maxlength">Tamanho máximo atingido!</div>
 		    </div>

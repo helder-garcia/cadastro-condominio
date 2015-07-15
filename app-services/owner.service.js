@@ -12,6 +12,7 @@
         service.GetAll = GetAll;
         service.GetById = GetById;
         service.GetByUsername = GetByUsername;
+        service.GetByUnit = GetByUnit;
         service.Create = Create;
         service.Update = Update;
         service.Delete = Delete;
@@ -30,12 +31,16 @@
             return $http.get(API_END_POINT + '/owners?username=' + username).then(handleSuccess, handleError('Error getting owners by username'));
         }
 
+        function GetByUnit(unitnumber) {
+            return $http.get(API_END_POINT + '/owners?unit=' + unitnumber).then(handleSuccess, handleError('Error getting owners by username'));
+        }
+
         function Create(owner) {
             return $http.post(API_END_POINT + '/owners', owner).then(handleSuccess, handleError('Error creating owners'));
         }
 
-        function Update(user) {
-            return $http.put(API_END_POINT + '/owners/' + user.id, user).then(handleSuccess, handleError('Error updating owners'));
+        function Update(owner) {
+            return $http.put(API_END_POINT + '/owners/' + owner.id, owner).then(handleSuccess, handleError('Error updating owners'));
         }
 
         function Delete(id) {

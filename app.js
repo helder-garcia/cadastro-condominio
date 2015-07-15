@@ -66,6 +66,13 @@
 			url : '/user-renter',
 			templateUrl : 'views/renter/renter.view.html'
 		});
+		$stateProvider.state('error', {
+			abstract : true,
+			template : '<ui-view/>',
+		}).state('error.500', {
+			url : '/error-500',
+			templateUrl : 'views/500.ejs'
+		});
 		$urlRouterProvider.otherwise('/login');
 		$httpProvider.interceptors.push('AuthInterceptor');
 		
