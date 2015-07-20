@@ -16,7 +16,7 @@
 		<div layout layout-sm="column">
 		  <md-input-container flex>
 		    <label>Primeiro Nome</label>
-		    <input name="firstName" ng-model="ownerEntry.firstName" required md-maxlength="20" minlength="2">
+		    <input name="firstName" ng-model="renterEntry.firstName" required md-maxlength="20" minlength="2">
 		    <div ng-messages="userForm.firstName.$error" ng-show="userForm.firstName.$dirty">
 		      <div ng-message="required">Este campo é obrigatório!</div>
 		      <div ng-message="md-maxlength">Tamanho máximo atingido!</div>
@@ -25,7 +25,7 @@
 		  </md-input-container>
 		  <md-input-container flex>
 		    <label>Sobrenome Completo</label>
-		    <input name="lastName" ng-model="ownerEntry.lastName" required md-maxlength="60" minlength="2">
+		    <input name="lastName" ng-model="renterEntry.lastName" required md-maxlength="60" minlength="2">
 		    <div ng-messages="userForm.lastName.$error" ng-show="userForm.lastName.$dirty">
 		      <div ng-message="required">Este campo é obrigatório!</div>
 		      <div ng-message="md-maxlength">Tamanho máximo atingido!</div>
@@ -34,7 +34,7 @@
 		  </md-input-container>
 		  <md-input-container flex>
 		    <label>Email</label>
-		    <input type="email" name="primaryEmail" ng-model="ownerEntry.primaryEmail" required>
+		    <input type="email" name="primaryEmail" ng-model="renterEntry.primaryEmail" required>
 		    <div ng-messages="userForm.primaryEmail.$error" ng-show="userForm.primaryEmail.$dirty">
 			  <div ng-message="email">Informe um email válido!</div>
 		      <div ng-message="required">Este campo é obrigatório!</div>
@@ -42,14 +42,14 @@
 		  </md-input-container>
 		  <md-input-container style="width:10%">
 		    <label>Unidade</label>
-		    <input name="unit" ng-model="ownerEntry.unit" disabled>
+		    <input name="unit" ng-model="renterEntry.unit" disabled>
 		  </md-input-container>
 		</div>
 		<div layout layout-sm="column">
 		  <md-input-container flex>
 		  	<md-tooltip>61-3333-2222</md-tooltip>
 		    <label>Telefone Residencial</label>
-		    <input name="homePhone" ng-model="ownerEntry.homePhone" required ng-pattern="phoneNumbrFixPtr" >			
+		    <input name="homePhone" ng-model="renterEntry.homePhone" required ng-pattern="phoneNumbrFixPtr" >			
 		    <div ng-messages="userForm.homePhone.$error" ng-show="userForm.homePhone.$dirty">
 		      <div ng-message="required">Este campo é obrigatório!</div>
 		      <div ng-message="pattern">Por favor, utilize o formato 61-3333-2222</div>
@@ -58,7 +58,7 @@
 		  <md-input-container flex>
 		  	<md-tooltip>(61) 9999-8888</md-tooltip>
 		    <label>Telefone Celular</label>
-		    <input name="cellPhone" ng-model="ownerEntry.cellPhone" required ng-pattern="phoneNumbrCelPtr" >
+		    <input name="cellPhone" ng-model="renterEntry.cellPhone" required ng-pattern="phoneNumbrCelPtr" >
 		    <div ng-messages="userForm.cellPhone.$error" ng-show="userForm.cellPhone.$dirty">
 		      <div ng-message="required">Este campo é obrigatório!</div>
 		      <div ng-message="pattern">Por favor, utilize o formato 61-9999-8888 ou 61-99999-8888</div>
@@ -67,27 +67,12 @@
 		  <md-input-container flex>
 		  	<md-tooltip>(61) 3333-2222</md-tooltip>
 		    <label>Telefone Comercial</label>
-		    <input name="workPhone" ng-model="ownerEntry.workPhone" ng-pattern="phoneNumbrFixPtr" >
+		    <input name="workPhone" ng-model="renterEntry.workPhone" ng-pattern="phoneNumbrFixPtr" >
 		    <div ng-messages="userForm.workPhone.$error" ng-show="userForm.workPhone.$dirty">
 		      <div ng-message="pattern">Por favor, utilize o formato 61-3333-2222</div>
 		    </div>
 		  </md-input-container>
 		</div>
-		<div>
-		  <md-input-container flex>
-		  		<md-checkbox class="md-primary" ng-true-value="'SIM'" ng-false-value="'NÃO'" ng-model="ownerEntry.isResident" aria-label="Morador">Morador? {{ ownerEntry.isResident }}</md-checkbox>
-		  </md-input-container>		
-		</div>
-		<div ng-hide="ownerEntry.isResident === 'SIM'">
-		  <md-input-container flex>
-		    <label>Endereço (Rua, Número, Cidade, Estado, CEP)</label>
-		    <input name="ownerAddress" ng-model="ownerEntry.ownerAddress" md-maxlength="120" >
-		    <div ng-messages="userForm.ownerAddress.$error" ng-show="userForm.ownerAddress.$dirty">
-		      <div ng-message="md-maxlength">Tamanho máximo atingido!</div>
-		    </div>
-		  </md-input-container>
-		</div>
-		<div ng-hide="ownerEntry.isResident === 'NÃO'">
 		<md-toolbar class="md-accent">
 			<h2 class="md-toolbar-tools">
 				<md-tooltip>Informe quem podemos contactar em caso de emergência</md-tooltip>
@@ -99,7 +84,7 @@
 		<div layout layout-sm="column">
 		  <md-input-container flex>
 		    <label>Nome</label>
-		    <input name="reference1Name" ng-model="ownerEntry.reference1Name" md-maxlength="20" minlength="2">
+		    <input name="reference1Name" ng-model="renterEntry.reference1Name" md-maxlength="20" minlength="2">
 		    <div ng-messages="userForm.reference1Name.$error" ng-show="userForm.reference1Name.$dirty">
 		      <div ng-message="md-maxlength">Tamanho máximo atingido!</div>
 		      <div ng-message="minlength">O nome deve ter mais de uma letra!</div>
@@ -108,7 +93,7 @@
 		  <md-input-container flex>
 		  	<md-tooltip>(61) 9999-8888</md-tooltip>
 		    <label>Telefone</label>
-		    <input name="reference1Phone" ng-model="ownerEntry.reference1Phone" ng-pattern="phoneNumbrCelPtr" >			
+		    <input name="reference1Phone" ng-model="renterEntry.reference1Phone" ng-pattern="phoneNumbrCelPtr" >			
 		      <div ng-messages="userForm.reference1Phone.$error" ng-show="userForm.reference1Phone.$dirty">
 		      <div ng-message="pattern">Por favor, utilize o formato 61-9999-8888 ou 61-99999-8888</div>
 		    </div>
@@ -124,28 +109,28 @@
 		<div layout layout-sm="column">
 		  <md-input-container flex>
 		    <label>Marca</label>
-		    <input name="vehicle1Brand" ng-model="ownerEntry.vehicle1Brand" md-maxlength="20" >			
+		    <input name="vehicle1Brand" ng-model="renterEntry.vehicle1Brand" md-maxlength="20" >			
 		    <div ng-messages="userForm.vehicle1Brand.$error" ng-show="userForm.vehicle1Brand.$dirty">
 		      <div ng-message="md-maxlength">Tamanho máximo atingido!</div>
 		    </div>
 		  </md-input-container>
 		  <md-input-container flex>
 		    <label>Modelo</label>
-		    <input name="vehicle1Model" ng-model="ownerEntry.vehicle1Model" md-maxlength="20" >
+		    <input name="vehicle1Model" ng-model="renterEntry.vehicle1Model" md-maxlength="20" >
 		    <div ng-messages="userForm.vehicle1Model.$error" ng-show="userForm.vehicle1Model.$dirty">
 		      <div ng-message="md-maxlength">Tamanho máximo atigindo!</div>
 		    </div>
 		  </md-input-container>
 		  <md-input-container flex>
 		    <label>Cor</label>
-		    <input name="vehicle1Color" ng-model="ownerEntry.vehicle1Color" md-maxlength="20" >
+		    <input name="vehicle1Color" ng-model="renterEntry.vehicle1Color" md-maxlength="20" >
 		    <div ng-messages="userForm.vehicle1Color.$error" ng-show="userForm.vehicle1Color.$dirty">
 		      <div ng-message="md-maxlength">Tamanho máximo atigindo!</div>
 		    </div>
 		  </md-input-container>
 		  <md-input-container flex>
 		    <label>Placa</label>
-		    <input name="vehicle1Number" ng-model="ownerEntry.vehicle1Number" ng-pattern="vehicleNumberPtr" ng-blur="ownerEntry.vehicle1Number=ownerEntry.vehicle1Number.toUpperCase();" >
+		    <input name="vehicle1Number" ng-model="renterEntry.vehicle1Number" ng-pattern="vehicleNumberPtr" ng-blur="renterEntry.vehicle1Number=renterEntry.vehicle1Number.toUpperCase();" >
 		    <div ng-messages="userForm.vehicle1Number.$error" ng-show="userForm.vehicle1Number.$dirty">
 		      <div ng-message="pattern">Por favor, utilize o formato XYZ-9999</div>
 		    </div>
@@ -154,28 +139,28 @@
 		<div layout layout-sm="column">
 		  <md-input-container flex>
 		    <label>Marca</label>
-		    <input name="vehicle2Brand" ng-model="ownerEntry.vehicle2Brand" md-maxlength="20" >			
+		    <input name="vehicle2Brand" ng-model="renterEntry.vehicle2Brand" md-maxlength="20" >			
 		    <div ng-messages="userForm.vehicle2Brand.$error" ng-show="userForm.vehicle2Brand.$dirty">
 		      <div ng-message="md-maxlength">Tamanho máximo atingido!</div>
 		    </div>
 		  </md-input-container>
 		  <md-input-container flex>
 		    <label>Modelo</label>
-		    <input name="vehicle2Model" ng-model="ownerEntry.vehicle2Model" md-maxlength="20" >
+		    <input name="vehicle2Model" ng-model="renterEntry.vehicle2Model" md-maxlength="20" >
 		    <div ng-messages="userForm.vehicle2Model.$error" ng-show="userForm.vehicle2Model.$dirty">
 		      <div ng-message="md-maxlength">Tamanho máximo atigindo!</div>
 		    </div>
 		  </md-input-container>
 		  <md-input-container flex>
 		    <label>Cor</label>
-		    <input name="vehicle2Color" ng-model="ownerEntry.vehicle2Color" md-maxlength="20" >
+		    <input name="vehicle2Color" ng-model="renterEntry.vehicle2Color" md-maxlength="20" >
 		    <div ng-messages="userForm.vehicle2Color.$error" ng-show="userForm.vehicle2Color.$dirty">
 		      <div ng-message="md-maxlength">Tamanho máximo atigindo!</div>
 		    </div>
 		  </md-input-container>
 		  <md-input-container flex>
 		    <label>Placa</label>
-		    <input name="vehicle2Number" ng-model="ownerEntry.vehicle2Number" ng-pattern="vehicleNumberPtr" ng-blur="ownerEntry.vehicle2Number=ownerEntry.vehicle2Number.toUpperCase();" >
+		    <input name="vehicle2Number" ng-model="renterEntry.vehicle2Number" ng-pattern="vehicleNumberPtr" ng-blur="renterEntry.vehicle2Number=renterEntry.vehicle2Number.toUpperCase();" >
 		    <div ng-messages="userForm.vehicle2Number.$error" ng-show="userForm.vehicle2Number.$dirty">
 		      <div ng-message="pattern">Por favor, utilize o formato XYZ-9999</div>
 		    </div>
@@ -184,28 +169,28 @@
 		<div layout layout-sm="column">
 		  <md-input-container flex>
 		    <label>Marca</label>
-		    <input name="vehicle3Brand" ng-model="ownerEntry.vehicle3Brand" md-maxlength="20" >			
+		    <input name="vehicle3Brand" ng-model="renterEntry.vehicle3Brand" md-maxlength="20" >			
 		    <div ng-messages="userForm.vehicle3Brand.$error" ng-show="userForm.vehicle3Brand.$dirty">
 		      <div ng-message="md-maxlength">Tamanho máximo atingido!</div>
 		    </div>
 		  </md-input-container>
 		  <md-input-container flex>
 		    <label>Modelo</label>
-		    <input name="vehicle3Model" ng-model="ownerEntry.vehicle3Model" md-maxlength="20" >
+		    <input name="vehicle3Model" ng-model="renterEntry.vehicle3Model" md-maxlength="20" >
 		    <div ng-messages="userForm.vehicle3Model.$error" ng-show="userForm.vehicle3Model.$dirty">
 		      <div ng-message="md-maxlength">Tamanho máximo atigindo!</div>
 		    </div>
 		  </md-input-container>
 		  <md-input-container flex>
 		    <label>Cor</label>
-		    <input name="vehicle3Color" ng-model="ownerEntry.vehicle3Color" md-maxlength="20" >
+		    <input name="vehicle3Color" ng-model="renterEntry.vehicle3Color" md-maxlength="20" >
 		    <div ng-messages="userForm.vehicle3Color.$error" ng-show="userForm.vehicle3Color.$dirty">
 		      <div ng-message="md-maxlength">Tamanho máximo atigindo!</div>
 		    </div>
 		  </md-input-container>
 		  <md-input-container flex>
 		    <label>Placa</label>
-		    <input name="vehicle3Number" ng-model="ownerEntry.vehicle3Number" ng-pattern="vehicleNumberPtr" ng-blur="ownerEntry.vehicle3Number=ownerEntry.vehicle3Number.toUpperCase();" >
+		    <input name="vehicle3Number" ng-model="renterEntry.vehicle3Number" ng-pattern="vehicleNumberPtr" ng-blur="renterEntry.vehicle3Number=renterEntry.vehicle3Number.toUpperCase();" >
 		    <div ng-messages="userForm.vehicle3Number.$error" ng-show="userForm.vehicle3Number.$dirty">
 		      <div ng-message="pattern">Por favor, utilize o formato XYZ-9999</div>
 		    </div>
@@ -221,21 +206,21 @@
 		<div layout layout-sm="column">
 		  <md-input-container flex>
 		    <label>Marca</label>
-		    <input name="bike1Brand" ng-model="ownerEntry.bike1Brand" md-maxlength="20" >			
+		    <input name="bike1Brand" ng-model="renterEntry.bike1Brand" md-maxlength="20" >			
 		    <div ng-messages="userForm.bike1Brand.$error" ng-show="userForm.bike1Brand.$dirty">
 		      <div ng-message="md-maxlength">Tamanho máximo atingido!</div>
 		    </div>
 		  </md-input-container>
 		  <md-input-container flex>
 		    <label>Modelo</label>
-		    <input name="bike1Model" ng-model="ownerEntry.bike1Model" md-maxlength="20" >
+		    <input name="bike1Model" ng-model="renterEntry.bike1Model" md-maxlength="20" >
 		    <div ng-messages="userForm.bike1Model.$error" ng-show="userForm.v1Model.$dirty">
 		      <div ng-message="md-maxlength">Tamanho máximo atigindo!</div>
 		    </div>
 		  </md-input-container>
 		  <md-input-container flex>
 		    <label>Cor</label>
-		    <input name="bike1Color" ng-model="ownerEntry.bike1Color" md-maxlength="20" >
+		    <input name="bike1Color" ng-model="renterEntry.bike1Color" md-maxlength="20" >
 		    <div ng-messages="userForm.bike1Color.$error" ng-show="userForm.bike1Color.$dirty">
 		      <div ng-message="md-maxlength">Tamanho máximo atigindo!</div>
 		    </div>
@@ -244,21 +229,21 @@
 		<div layout layout-sm="column">
 		  <md-input-container flex>
 		    <label>Marca</label>
-		    <input name="bike2Brand" ng-model="ownerEntry.bike2Brand" md-maxlength="20" >			
+		    <input name="bike2Brand" ng-model="renterEntry.bike2Brand" md-maxlength="20" >			
 		    <div ng-messages="userForm.bike2Brand.$error" ng-show="userForm.bike2Brand.$dirty">
 		      <div ng-message="md-maxlength">Tamanho máximo atingido!</div>
 		    </div>
 		  </md-input-container>
 		  <md-input-container flex>
 		    <label>Modelo</label>
-		    <input name="bike2Model" ng-model="ownerEntry.bike2Model" md-maxlength="20" >
+		    <input name="bike2Model" ng-model="renterEntry.bike2Model" md-maxlength="20" >
 		    <div ng-messages="userForm.bike2Model.$error" ng-show="userForm.bike2Model.$dirty">
 		      <div ng-message="md-maxlength">Tamanho máximo atigindo!</div>
 		    </div>
 		  </md-input-container>
 		  <md-input-container flex>
 		    <label>Cor</label>
-		    <input name="bike2Color" ng-model="ownerEntry.bike2Color" md-maxlength="20" >
+		    <input name="bike2Color" ng-model="renterEntry.bike2Color" md-maxlength="20" >
 		    <div ng-messages="userForm.bike2Color.$error" ng-show="userForm.bike2Color.$dirty">
 		      <div ng-message="md-maxlength">Tamanho máximo atigindo!</div>
 		    </div>
@@ -267,26 +252,25 @@
 		<div layout layout-sm="column">
 		  <md-input-container flex>
 		    <label>Marca</label>
-		    <input name="bike3Brand" ng-model="ownerEntry.bike3Brand" md-maxlength="20" >			
+		    <input name="bike3Brand" ng-model="renterEntry.bike3Brand" md-maxlength="20" >			
 		    <div ng-messages="userForm.bike3Brand.$error" ng-show="userForm.bike3Brand.$dirty">
 		      <div ng-message="md-maxlength">Tamanho máximo atingido!</div>
 		    </div>
 		  </md-input-container>
 		  <md-input-container flex>
 		    <label>Modelo</label>
-		    <input name="bike3Model" ng-model="ownerEntry.bike3Model" md-maxlength="20" >
+		    <input name="bike3Model" ng-model="renterEntry.bike3Model" md-maxlength="20" >
 		    <div ng-messages="userForm.bike3Model.$error" ng-show="userForm.bike3Model.$dirty">
 		      <div ng-message="md-maxlength">Tamanho máximo atigindo!</div>
 		    </div>
 		  </md-input-container>
 		  <md-input-container flex>
 		    <label>Cor</label>
-		    <input name="bike3Color" ng-model="ownerEntry.bike3Color" md-maxlength="20" >
+		    <input name="bike3Color" ng-model="renterEntry.bike3Color" md-maxlength="20" >
 		    <div ng-messages="userForm.bike3Color.$error" ng-show="userForm.bike3Color.$dirty">
 		      <div ng-message="md-maxlength">Tamanho máximo atigindo!</div>
 		    </div>
 		  </md-input-container>
-		</div>
 		</div>
 	</form>
 </md-content>

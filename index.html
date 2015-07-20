@@ -13,7 +13,7 @@
 <body layout="column" ng-controller="navController">
     <md-toolbar layout="row">
       <div class="md-toolbar-tools">
-      	<md-button ng-show="$state.current.name === 'user.owner'" ng-click="back()" class="material-icons" style="color: white">
+      	<md-button ng-show="$state.current.name === 'user.owner' || $state.current.name === 'user.renter'" ng-click="back()" class="material-icons" style="color: white">
       		<md-tooltip>Voltar</md-tooltip>
       		chevron_left
       	</md-button>
@@ -33,23 +33,6 @@
             </md-content>
         </div>
     </div>
-
-<!-- 
-    <div class="jumbotron">
-
-        <div class="container">
-            <div class="col-sm-8 col-sm-offset-2">
-                <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
-                
-            </div>
-        </div>
-    </div>
-    <div class="credits text-center">
-        <p>
-            <a href="http://www.webify.com.br">Webify</a>
-        </p>
-    </div>
- -->
     <script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
     <script src="node_modules/angular/angular.js"></script>
     <script src="node_modules/angular-resource/angular-resource.js"></script>
@@ -70,9 +53,11 @@
     <script src="app-services/flash.service.js"></script>
 
     <!-- Real user service that uses an api -->
-    <script src="config/env/development.js"></script>
+    <!-- <script src="config/env/development.js"></script> -->
+    <script src="config/env/production.js"></script>
     <script src="app-services/user.service.js"></script>
     <script src="app-services/owner.service.js"></script>
+    <script src="app-services/renter.service.js"></script>
     
 
     <!-- Fake user service for demo that uses local storage -->
@@ -81,6 +66,7 @@
     <script src="home/home.controller.js"></script>
     <script src="login/login.controller.js"></script>
     <script src="views/owner/owner.controller.js"></script>
+    <script src="views/renter/renter.controller.js"></script>
     <script src="register/register.controller.js"></script>
 </body>
 </html>

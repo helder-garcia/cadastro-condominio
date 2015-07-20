@@ -64,7 +64,8 @@
 			controller : 'OwnerController'
 		}).state('user.renter', {
 			url : '/user-renter',
-			templateUrl : 'views/renter/renter.view.html'
+			templateUrl : 'views/renter/renter.view.html',
+			controller : 'RenterController'
 		});
 		$stateProvider.state('error', {
 			abstract : true,

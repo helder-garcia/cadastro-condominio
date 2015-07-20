@@ -5,12 +5,12 @@
         .module('app')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$location', 'AuthenticationService', 'FlashService'];
-    function LoginController($location, AuthenticationService, FlashService) {
+    LoginController.$inject = ['$location', 'AuthenticationService', 'FlashService', '$state'];
+    function LoginController($location, AuthenticationService, FlashService, $state) {
         var vm = this;
 
         vm.login = login;
-
+        
         (function initController() {
             // reset login status
             //AuthenticationService.ClearCredentials();
@@ -18,6 +18,16 @@
 
         function login() {
             vm.dataLoading = true;
+            vm.error = {};
+            vm.error.success = true;
+            AuthenticationService.Login(vm.username).success(function(result) {
+            	vm.error.success = true;
+            	$state.go('user.type');
+            }).error(function(err) {           	
+            	vm.error = err;
+            	vm.dataLoading = false;
+            });
+            /*
             AuthenticationService.Login(vm.username, function (response) {
             	//console.log("<<<<< LOGIN CTRL")
             	//console.log(response.user.username);
@@ -31,6 +41,7 @@
                     vm.dataLoading = false;
                 }
             });
+            */
         };
     }
 

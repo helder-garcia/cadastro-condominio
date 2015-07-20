@@ -6,8 +6,8 @@
         .factory('AuthenticationService', AuthenticationService)
     	.factory('AuthInterceptor', AuthInterceptor);
 
-    AuthenticationService.$inject = ['$http', '$rootScope', '$timeout', 'UserService', 'API_END_POINT', 'LocalService', 'AccessLevels'];
-    function AuthenticationService($http, $rootScope, $timeout, UserService, API_END_POINT, LocalService, AccessLevels) {
+    AuthenticationService.$inject = ['$http', '$rootScope', '$timeout', 'UserService', 'API_END_POINT', 'LocalService', 'AccessLevels', 'toaster'];
+    function AuthenticationService($http, $rootScope, $timeout, UserService, API_END_POINT, LocalService, AccessLevels, toaster) {
         var service = {};
 
         service.Login = Login;
@@ -36,7 +36,8 @@
               return LocalService.get('auth_user');
             }
 
-        function Login(username, callback) {
+        //function Login(username, callback) {
+        function Login(username) {
 
             /*
 			 * Dummy authentication for testing, uses $timeout to simulate api
@@ -52,7 +53,20 @@
 			 */
             // Use this for real authentication
             /* ---------------------------------------------- */
-            $http.post(API_END_POINT + '/authenticates/authenticate', { username: username })
+        	var login = $http.post(API_END_POINT + '/authenticates/authenticate', { username: username });
+            login.success(function(response) {
+            	LocalService.set('auth_user', response.user.username);
+            	LocalService.set('auth_token', response.token);
+              }).error(function(err) {
+            	  toaster.pop('info', "Identificador Inexistente");
+              });
+              
+              
+              
+            return login;
+   
+            /*
+        	$http.post(API_END_POINT + '/authenticates/authenticate', { username: username })
                 .success(function (response) {
                 	LocalService.set('auth_user', response.user.username);
                 	LocalService.set('auth_token', response.token);
@@ -61,7 +75,8 @@
                 })
                 .error(function(response){
                 	callback(response);
-                });;
+                });
+                */
 
         }
 
