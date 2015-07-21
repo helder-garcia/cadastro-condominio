@@ -42,7 +42,7 @@
 			}
 		}).state('anon.login', {
 			url : '/login',
-			templateUrl : 'login/login.view.html',
+			templateUrl : 'assets/templates/login.view.html',
 			controller : 'LoginController',
 			controllerAs : 'vm'
 		});
@@ -55,24 +55,24 @@
 			}
 		}).state('user.type', {
 			url : '/user-type',
-			templateUrl : 'home/home.view.html',
+			templateUrl : 'assets/templates/home.view.html',
 			controller : 'HomeController',
 			controllerAs : 'vm'
 		}).state('user.owner', {
 			url : '/user-owner',
-			templateUrl : 'views/owner/owner.view.html',
+			templateUrl : 'assets/templates/owner.view.html',
 			controller : 'OwnerController'
 		}).state('user.renter', {
 			url : '/user-renter',
-			templateUrl : 'views/renter/renter.view.html',
+			templateUrl : 'assets/templates/renter.view.html',
 			controller : 'RenterController'
 		});
 		$stateProvider.state('error', {
 			abstract : true,
 			template : '<ui-view/>',
 		}).state('error.500', {
-			url : '/error-500',
-			templateUrl : 'views/500.ejs'
+			url : 'error-500',
+			templateUrl : 'assets/templates/500.ejs'
 		});
 		$urlRouterProvider.otherwise('/login');
 		$httpProvider.interceptors.push('AuthInterceptor');
